@@ -5,6 +5,7 @@ import com.rhino.chronometer.app.di.AppScope
 import com.rhino.socialfeed.app.di.modules.MoshiModule
 import com.rhino.socialfeed.app.di.modules.network.NetworkModule
 import com.rhino.socialfeed.app.di.modules.PicassoModule
+import com.rhino.socialfeed.app.di.modules.SessionManager
 import com.rhino.socialfeed.app.di.modules.TwitterAppModule
 import dagger.Component
 
@@ -18,4 +19,5 @@ import dagger.Component
 )
 interface AppComponent {
     fun inject(app: SocialFeedApplication)
+    fun sessionManager(): SessionManager
 }

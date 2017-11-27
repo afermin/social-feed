@@ -1,0 +1,92 @@
+package com.rhino.socialfeed.models.tweet
+
+import com.squareup.moshi.Json
+
+class User {
+
+    @Json(name = "id")
+    var id: Int? = null
+    @Json(name = "id_str")
+    var idStr: String? = null
+    @Json(name = "name")
+    var name: String? = null
+    @Json(name = "screen_name")
+    var screenName: String? = null
+    @Json(name = "location")
+    var location: String? = null
+    @Json(name = "description")
+    var description: String? = null
+    @Json(name = "url")
+    var url: String? = null
+    @Json(name = "entities")
+    var entities: Entities? = null
+    @Json(name = "protected")
+    var _protected: Boolean? = null
+    @Json(name = "followers_count")
+    var followersCount: Int? = null
+    @Json(name = "friends_count")
+    var friendsCount: Int? = null
+    @Json(name = "listed_count")
+    var listedCount: Int? = null
+    @Json(name = "created_at")
+    var createdAt: String? = null
+    @Json(name = "favourites_count")
+    var favouritesCount: Int? = null
+    @Json(name = "utc_offset")
+    var utcOffset: Int? = null
+    @Json(name = "time_zone")
+    var timeZone: String? = null
+    @Json(name = "geo_enabled")
+    var geoEnabled: Boolean? = null
+    @Json(name = "verified")
+    var verified: Boolean? = null
+    @Json(name = "statuses_count")
+    var statusesCount: Int? = null
+    @Json(name = "lang")
+    var lang: String? = null
+    @Json(name = "contributors_enabled")
+    var contributorsEnabled: Boolean? = null
+    @Json(name = "is_translator")
+    var isTranslator: Boolean? = null
+    @Json(name = "is_translation_enabled")
+    var isTranslationEnabled: Boolean? = null
+    @Json(name = "profile_background_color")
+    var profileBackgroundColor: String? = null
+    @Json(name = "profile_background_image_url")
+    var profileBackgroundImageUrl: String? = null
+    @Json(name = "profile_background_image_url_https")
+    var profileBackgroundImageUrlHttps: String? = null
+    @Json(name = "profile_background_tile")
+    var profileBackgroundTile: Boolean? = null
+    @Json(name = "profile_image_url")
+    var profileImageUrl: String? = null
+    @Json(name = "profile_image_url_https")
+    var profileImageUrlHttps: String? = null
+    @Json(name = "profile_banner_url")
+    var profileBannerUrl: String? = null
+    @Json(name = "profile_link_color")
+    var profileLinkColor: String? = null
+    @Json(name = "profile_sidebar_border_color")
+    var profileSidebarBorderColor: String? = null
+    @Json(name = "profile_sidebar_fill_color")
+    var profileSidebarFillColor: String? = null
+    @Json(name = "profile_text_color")
+    var profileTextColor: String? = null
+    @Json(name = "profile_use_background_image")
+    var profileUseBackgroundImage: Boolean? = null
+    @Json(name = "has_extended_profile")
+    var hasExtendedProfile: Boolean? = null
+    @Json(name = "default_profile")
+    var defaultProfile: Boolean? = null
+    @Json(name = "default_profile_image")
+    var defaultProfileImage: Boolean? = null
+    @Json(name = "following")
+    var following: Boolean? = null
+    @Json(name = "follow_request_sent")
+    var followRequestSent: Boolean? = null
+    @Json(name = "notifications")
+    var notifications: Boolean? = null
+    @Json(name = "translator_type")
+    var translatorType: String? = null
+
+}

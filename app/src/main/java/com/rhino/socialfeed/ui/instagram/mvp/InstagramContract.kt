@@ -1,4 +1,4 @@
-package com.rhino.socialfeed.ui.twitter.mvp
+package com.rhino.socialfeed.ui.instagram.mvp
 
 import com.rhino.socialfeed.common.mvp.MVPContract
 import com.twitter.sdk.android.core.TwitterSession
@@ -10,19 +10,16 @@ import io.reactivex.Observable
  */
 
 
-class TwitterContract {
+class InstagramContract {
 
     interface Model : MVPContract.Model {
-        fun getRxTwitterLogin(): Observable<TwitterSession>
-        fun saveTwitterSession(twitterSession: TwitterSession)
+
     }
 
     interface View : MVPContract.View {
-        fun setListAdapter()
         fun setLoginButtonVisibility(int: Int)
     }
 
-    interface Presenter : MVPContract.Presenter {
-    }
+    interface Presenter : MVPContract.Presenter
 
 }

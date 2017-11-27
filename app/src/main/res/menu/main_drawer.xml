@@ -4,11 +4,11 @@
     <group android:id="@+id/group_feature"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_twitter"
+            android:id="@+id/navTwitter"
             android:icon="@drawable/ic_twitter"
             android:title="Twitter" />
         <item
-            android:id="@+id/nav_instagram"
+            android:id="@+id/navInstagram"
             android:icon="@drawable/ic_instagram"
             android:title="Instagram" />
     </group>
@@ -16,7 +16,7 @@
     <group android:id="@+id/group_settings"
         android:checkableBehavior="single">>
             <item
-                android:id="@+id/nav_settings"
+                android:id="@+id/navSettings"
                 android:icon="@drawable/ic_settings"
                 android:title="Settings" />
 

@@ -15,4 +15,8 @@
         @import url('https://fonts.googleapis.com/css?family=Montserrat');
     </style>
 
+    <style name="AppTheme.Dark.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.Dark.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

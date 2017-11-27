@@ -1,13 +1,14 @@
 package com.rhino.socialfeed.ui.twitter.di
 
-import android.support.v4.app.Fragment
-import com.rhino.socialfeed.common.RxActivity
+import com.rhino.socialfeed.app.di.modules.SessionManager
 import com.rhino.socialfeed.ui.main.MainActivity
 import com.rhino.socialfeed.ui.twitter.TwitterFragment
 import com.rhino.socialfeed.ui.twitter.mvp.TwitterContract
 import com.rhino.socialfeed.ui.twitter.mvp.TwitterModel
 import com.rhino.socialfeed.ui.twitter.mvp.TwitterPresenter
 import com.rhino.socialfeed.ui.twitter.mvp.TwitterView
+import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter
+import com.twitter.sdk.android.tweetui.UserTimeline
 import dagger.Module
 import dagger.Provides
 
@@ -23,19 +24,41 @@ class TwitterModule(private val fragment: TwitterFragment) {
 
     @Provides
     @TwitterFragmentScope
-    fun provideModel(): TwitterContract.Model = TwitterModel(
-            fragment = fragment
+    fun provideModel(sessionManager: SessionManager): TwitterContract.Model = TwitterModel(
+            fragment = fragment,
+            sessionManager = sessionManager
     )
 
     @Provides
     @TwitterFragmentScope
-    fun provideView():
-            TwitterContract.View = TwitterView(activity = fragment.activity as RxActivity)
+    fun provideView(activity: MainActivity,
+                    adapter: TweetTimelineListAdapter
+    ): TwitterContract.View = TwitterView(activity = activity, adapter = adapter)
 
     @Provides
     @TwitterFragmentScope
     fun providePresenter(
             view: TwitterContract.View,
-            model: TwitterContract.Model
-    ): TwitterContract.Presenter = TwitterPresenter(view = view, model = model)
+            model: TwitterContract.Model,
+            sessionManager: SessionManager
+    ): TwitterContract.Presenter =
+            TwitterPresenter(view = view, model = model, sessionManager = sessionManager)
+
+    @Provides
+    @TwitterFragmentScope
+    fun provideUserTimeline(
+            sessionManager: SessionManager
+    ): UserTimeline = UserTimeline.Builder()
+            .screenName("alexanderfermin")
+            .build()
+
+    @Provides
+    @TwitterFragmentScope
+    fun provideTweetTimelineListAdapter(
+            activity: MainActivity,
+            userTimeline: UserTimeline
+    ): TweetTimelineListAdapter = TweetTimelineListAdapter.Builder(activity)
+            .setTimeline(userTimeline)
+            .build()
+
 }

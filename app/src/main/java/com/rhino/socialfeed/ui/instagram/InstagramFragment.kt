@@ -1,29 +1,24 @@
-package com.rhino.socialfeed.ui.twitter
+package com.rhino.socialfeed.ui.instagram
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.rhino.socialfeed.R
 import com.rhino.socialfeed.app.SocialFeedApplication
-import com.rhino.socialfeed.ui.twitter.di.DaggerTwitterComponent
-import com.rhino.socialfeed.ui.twitter.di.TwitterModule
-import com.rhino.socialfeed.ui.twitter.mvp.TwitterContract
-import com.twitter.sdk.android.core.Callback
-import com.twitter.sdk.android.core.Result
-import com.twitter.sdk.android.core.TwitterException
-import com.twitter.sdk.android.core.TwitterSession
-import io.reactivex.Observable
+import com.rhino.socialfeed.ui.instagram.di.DaggerInstagramComponent
+import com.rhino.socialfeed.ui.instagram.di.InstagramModule
+import com.rhino.socialfeed.ui.instagram.mvp.InstagramContract
 import kotlinx.android.synthetic.main.fragment_twitter.*
 import javax.inject.Inject
 
-class TwitterFragment : Fragment() {
+class InstagramFragment : Fragment() {
 
-    @Inject lateinit var view: TwitterContract.View
-    @Inject lateinit var presenter: TwitterContract.Presenter
+    /*https://gist.github.com/j4rs/8963688*/
+
+    @Inject lateinit var view: InstagramContract.View
+    @Inject lateinit var presenter: InstagramContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,34 +44,17 @@ class TwitterFragment : Fragment() {
         btnTwitterLogin.onActivityResult(requestCode, resultCode, data)
     }
 
-    fun rxTwitterLogin(): Observable<TwitterSession> {
-        return Observable.create { subscriber ->
-
-            btnTwitterLogin.callback = object : Callback<TwitterSession>() {
-                override fun failure(exception: TwitterException?) {
-                    subscriber.onError(exception)
-                }
-
-                override fun success(result: Result<TwitterSession>?) {
-                    Log.d("success", "twitter")
-                    subscriber.onNext(result!!.data)
-                }
-            }
-        }
-    }
-
-
     private fun initComponent() {
-        DaggerTwitterComponent.builder()
+        DaggerInstagramComponent.builder()
                 .appComponent(SocialFeedApplication[activity!!].component())
-                .twitterModule(TwitterModule(this))
+                .instagramModule(InstagramModule(this))
                 .build()
                 .inject(this)
     }
 
     companion object {
         // TODO: Rename and change types and number of parameters
-        fun newInstance(): TwitterFragment = TwitterFragment()
+        fun newInstance(): InstagramFragment = InstagramFragment()
     }
 
 

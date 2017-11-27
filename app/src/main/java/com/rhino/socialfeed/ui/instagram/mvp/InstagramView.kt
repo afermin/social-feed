@@ -1,4 +1,4 @@
-package com.rhino.socialfeed.ui.twitter.mvp
+package com.rhino.socialfeed.ui.instagram.mvp
 
 import android.view.View
 import android.view.ViewGroup
@@ -13,19 +13,15 @@ import kotlinx.android.synthetic.main.fragment_twitter.view.*
  * Created by alexanderjosefermingomez on 11/24/17.
  */
 
-class TwitterView(override val activity: RxActivity, val adapter: TweetTimelineListAdapter)
-    : MVPView(activity), TwitterContract.View {
+class InstagramView(override val activity: RxActivity)
+    : MVPView(activity), InstagramContract.View {
 
     override fun setLoginButtonVisibility(visibility: Int) {
         btnTwitterLogin.visibility = visibility
     }
 
-    override fun setListAdapter() {
-        recycler.adapter = adapter
-    }
-
     override fun inflateLayout(container: ViewGroup?): View? {
-        val view = FrameLayout.inflate(activity, R.layout.fragment_twitter, this)
+        val view = FrameLayout.inflate(activity, R.layout.fragment_instagram, this)
         return view
     }
 
