@@ -1,5 +1,6 @@
 package com.rhino.socialfeed.ui.instagram.mvp
 
+import android.webkit.WebResourceRequest
 import com.rhino.socialfeed.common.mvp.MVPContract
 import com.twitter.sdk.android.core.TwitterSession
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter
@@ -17,7 +18,9 @@ class InstagramContract {
     }
 
     interface View : MVPContract.View {
+        fun loadWebViewLogin()
         fun setLoginButtonVisibility(int: Int)
+        fun observableShouldOverrideUrlLoading(): Observable<WebResourceRequest>
     }
 
     interface Presenter : MVPContract.Presenter
