@@ -1,4 +1,4 @@
-package com.rhino.socialfeed.app.di.modules
+package com.rhino.socialfeed.app.di
 
 
 import android.content.Context
@@ -21,6 +21,7 @@ class AppModule(private val app: SocialFeedApplication) {
 
     @Provides
     @AppScope
+    @AppQualifier
     fun provideApplicationContext(): Context = app
 
     @Provides

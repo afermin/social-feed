@@ -1,11 +1,11 @@
-package com.rhino.socialfeed.activities.main.di
+package com.rhino.socialfeed.ui.main.di
 
 import android.content.Context
-import com.rhino.socialfeed.activities.main.MainActivity
-import com.rhino.socialfeed.activities.main.mvp.MainContract
-import com.rhino.socialfeed.activities.main.mvp.MainModel
-import com.rhino.socialfeed.activities.main.mvp.MainPresenter
-import com.rhino.socialfeed.activities.main.mvp.MainView
+import com.rhino.socialfeed.ui.main.MainActivity
+import com.rhino.socialfeed.ui.main.mvp.MainContract
+import com.rhino.socialfeed.ui.main.mvp.MainModel
+import com.rhino.socialfeed.ui.main.mvp.MainPresenter
+import com.rhino.socialfeed.ui.main.mvp.MainView
 import dagger.Module
 import dagger.Provides
 
@@ -28,7 +28,7 @@ class MainModule(private val activity: MainActivity) {
     @Provides
     @MainScope
     fun provideView(activity: MainActivity):
-                    MainContract.View = MainView(activity = activity)
+            MainContract.View = MainView(activity = activity)
 
     @Provides
     @MainScope

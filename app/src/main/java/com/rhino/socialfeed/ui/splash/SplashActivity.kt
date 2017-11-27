@@ -1,4 +1,4 @@
-package com.rhino.socialfeed.activities.splash
+package com.rhino.socialfeed.ui.splash
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

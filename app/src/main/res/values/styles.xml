@@ -12,6 +12,7 @@
         <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat');
     </style>
 
 </resources>

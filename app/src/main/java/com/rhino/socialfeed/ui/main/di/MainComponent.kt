@@ -1,6 +1,6 @@
-package com.rhino.socialfeed.activities.main.di
+package com.rhino.socialfeed.ui.main.di
 
-import com.rhino.socialfeed.activities.main.MainActivity
+import com.rhino.socialfeed.ui.main.MainActivity
 import com.rhino.socialfeed.app.di.AppComponent
 import dagger.Component
 

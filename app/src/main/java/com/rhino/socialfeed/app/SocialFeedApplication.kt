@@ -1,9 +1,10 @@
 package com.rhino.socialfeed.app
 
-import android.app.Activity
 import android.app.Application
 import android.app.Service
+import android.support.v4.app.FragmentActivity
 import com.rhino.socialfeed.app.di.AppComponent
+import com.rhino.socialfeed.app.di.AppModule
 import com.rhino.socialfeed.app.di.DaggerAppComponent
 import com.twitter.sdk.android.core.Twitter
 import com.twitter.sdk.android.core.TwitterConfig
@@ -17,7 +18,8 @@ class SocialFeedApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        appComponent = DaggerAppComponent.builder().build()
+        appComponent = DaggerAppComponent.builder()
+                .appModule(AppModule(this)).build()
 
         appComponent.inject(this)
 
@@ -28,7 +30,7 @@ class SocialFeedApplication : Application() {
 
     companion object {
 
-        operator fun get(activity: Activity): SocialFeedApplication =
+        operator fun get(activity: FragmentActivity): SocialFeedApplication =
                 activity.application as SocialFeedApplication
 
         operator fun get(service: Service): SocialFeedApplication =

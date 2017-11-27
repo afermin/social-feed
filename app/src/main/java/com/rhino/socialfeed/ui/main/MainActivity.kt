@@ -1,14 +1,18 @@
-package com.rhino.socialfeed.activities.main
+package com.rhino.socialfeed.ui.main
 
+import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import com.rhino.socialfeed.activities.main.di.DaggerMainComponent
-import com.rhino.socialfeed.activities.main.di.MainModule
-import com.rhino.socialfeed.activities.main.mvp.MainContract
+import android.util.Log
+import com.rhino.socialfeed.R
 import com.rhino.socialfeed.app.SocialFeedApplication
+import com.rhino.socialfeed.common.RxActivity
+import com.rhino.socialfeed.ui.main.di.DaggerMainComponent
+import com.rhino.socialfeed.ui.main.di.MainModule
+import com.rhino.socialfeed.ui.main.mvp.MainContract
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : RxActivity() {
 
     @Inject lateinit var view: MainContract.View
     @Inject lateinit var presenter: MainContract.Presenter
@@ -23,6 +27,13 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         presenter.onDestroy()
         super.onDestroy()
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+        super.onActivityResult(requestCode, resultCode, data)
+        val fragment = supportFragmentManager.findFragmentById(R.id.flContent)
+        fragment?.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun initComponent() {

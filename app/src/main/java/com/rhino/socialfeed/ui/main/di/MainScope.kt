@@ -1,4 +1,4 @@
-package com.rhino.socialfeed.activities.main.di
+package com.rhino.socialfeed.ui.main.di
 
 import javax.inject.Scope
 
