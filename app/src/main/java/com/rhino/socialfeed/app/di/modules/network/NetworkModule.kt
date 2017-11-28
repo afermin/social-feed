@@ -29,46 +29,22 @@ class NetworkModule {
 
     @Provides
     @AppScope
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
-        level = if (BuildConfig.DEBUG) Level.BODY else Level.NONE
-    }
-
-    @Provides
-    @AppScope
     fun provideCache(@CacheQualifier file: File, @CacheQualifier maxSize: Long): Cache =
             Cache(file, maxSize)
 
     @Provides
     @AppScope
-    fun provideOkHttpClient(
-            httpLoggingInterceptor: HttpLoggingInterceptor, cache: Cache): OkHttpClient =
+    fun provideOkHttpClient(cache: Cache): OkHttpClient =
             OkHttpClient.Builder()
                     .cache(cache)
-                    .addInterceptor(httpLoggingInterceptor)
                     .build()
 
     @Provides
     @AppScope
-    @TwitterAuthenticationQualifier
-    fun provideAuthenticatedOkHttpClient(
-            httpLoggingInterceptor: HttpLoggingInterceptor,
-            authenticationInterceptor: TwitterAuthenticationInterceptor,
-            cache: Cache): OkHttpClient =
-            OkHttpClient.Builder()
-                    .cache(cache)
-                    .addInterceptor(authenticationInterceptor)
-                    .addInterceptor(httpLoggingInterceptor)
-                    .build()
-    @Provides
-    @AppScope
     @InstagramAuthenticationQualifier
     fun provideInstagramAuthenticatedOkHttpClient(
-            httpLoggingInterceptor: HttpLoggingInterceptor,
-            authenticationInterceptor: InstagramAuthenticationInterceptor,
             cache: Cache): OkHttpClient =
             OkHttpClient.Builder()
                     .cache(cache)
-                    .addInterceptor(authenticationInterceptor)
-                    .addInterceptor(httpLoggingInterceptor)
                     .build()
 }

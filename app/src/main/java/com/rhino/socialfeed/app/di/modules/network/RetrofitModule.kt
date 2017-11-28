@@ -29,7 +29,7 @@ class RetrofitModule {
 
     @Provides
     @AppScope
-    fun provideConverterFactory(@FlatObjectsQualifier moshi: Moshi): Converter.Factory =
+    fun provideConverterFactory(moshi: Moshi): Converter.Factory =
             MoshiConverterFactory.create(moshi)
 
     @Provides
@@ -56,7 +56,7 @@ class RetrofitModule {
     @InstagramAuthenticationQualifier
     fun provideInstagramRetrofit(
             @BaseTwitterUrlQualifier baseUrl: String,
-            @TwitterAuthenticationQualifier client: OkHttpClient,
+            @InstagramAuthenticationQualifier client: OkHttpClient,
             converter: Converter.Factory,
             callAdapter: CallAdapter.Factory): Retrofit =
             Retrofit.Builder()

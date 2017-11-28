@@ -7,6 +7,9 @@ import com.rhino.socialfeed.app.di.modules.network.NetworkModule
 import com.rhino.socialfeed.app.di.modules.PicassoModule
 import com.rhino.socialfeed.app.di.modules.SessionManager
 import com.rhino.socialfeed.app.di.modules.TwitterAppModule
+import com.rhino.socialfeed.app.di.modules.api.ApiModule
+import com.rhino.socialfeed.app.di.modules.api.InstagramApi
+import com.squareup.picasso.Picasso
 import dagger.Component
 
 @AppScope
@@ -15,9 +18,12 @@ import dagger.Component
         TwitterAppModule::class,
         NetworkModule::class,
         PicassoModule::class,
-        MoshiModule::class)
+        MoshiModule::class,
+        ApiModule::class)
 )
 interface AppComponent {
     fun inject(app: SocialFeedApplication)
     fun sessionManager(): SessionManager
+    fun instagramApi(): InstagramApi
+    fun picasso(): Picasso
 }

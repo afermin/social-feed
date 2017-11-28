@@ -71,10 +71,14 @@ dependencies {
     //For Images
     compile "com.squareup.picasso:picasso:2.5.2"
     compile "com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0"
+    compile 'jp.wasabeef:picasso-transformations:2.1.2'
 
     //Retrofit
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
     compile "com.squareup.retrofit2:converter-moshi:$retrofit_version"
     compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+
+    //Font library
+    compile "uk.co.chrisjenx:calligraphy:2.2.0"
 
 }

@@ -17,7 +17,8 @@ class MainContract {
     interface View : MVPContract.View {
         fun replace(fragment: Fragment)
         fun observableNavigationView(): Observable<MenuItem>
-        fun checkedItem()
+        fun closeDrawer()
+        fun setTitle(title: CharSequence)
     }
 
     interface Presenter : MVPContract.Presenter

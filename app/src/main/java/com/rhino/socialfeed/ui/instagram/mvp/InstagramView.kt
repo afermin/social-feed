@@ -1,47 +1,95 @@
 package com.rhino.socialfeed.ui.instagram.mvp
 
+import android.graphics.Bitmap
+import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.FrameLayout
+import com.jakewharton.rxbinding2.view.RxView
 import com.rhino.socialfeed.R
 import com.rhino.socialfeed.common.RxActivity
 import com.rhino.socialfeed.common.mvp.MVPView
+import com.rhino.socialfeed.models.instagram.media.Datum
+import com.rhino.socialfeed.ui.instagram.InstagramAdapter
+import com.squareup.picasso.Picasso
 import io.reactivex.Observable
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.fragment_instagram.view.*
-import kotlinx.android.synthetic.main.fragment_twitter.view.*
+import kotlinx.android.synthetic.main.instagram_content.view.*
+import kotlinx.android.synthetic.main.instagram_header.view.*
 
 /**
  * Created by alexanderjosefermingomez on 11/24/17.
  */
 
-class InstagramView(override val activity: RxActivity)
+class InstagramView(override val activity: RxActivity,
+                    val adapter: InstagramAdapter,
+                    val picasso: Picasso)
     : MVPView(activity), InstagramContract.View {
 
+    override val observablePageStarted: Observable<String> by lazy {
+        Observable.create<String>({ subscriber ->
+            webView.webViewClient = object : WebViewClient() {
+                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                    super.onPageStarted(view, url, favicon)
+                    subscriber.onNext(url)
+                }
+            }
+        })
+    }
+
+    override val observableButton: Observable<Any> by lazy { RxView.clicks(btnLogin) }
+
     override fun loadWebViewLogin() {
-        webView.loadUrl("https://api.instagram.com/oauth/authorize/?client_id=b09363abd21c4ca8836f1b9a76fc8f6e&redirect_uri=http://www.kogimobile.com/android/socialfeed/redirect&response_type=token")
+        webView.loadUrl("https://www.instagram.com/oauth/authorize/?client_id=2a5464070558449c81adc30ce410887c&redirect_uri=http://nucleos.io/&response_type=token")
     }
 
     override fun setLoginButtonVisibility(visibility: Int) {
-        btnTwitterLogin.visibility = visibility
+        btnLogin.visibility = visibility
+    }
+
+    override fun setWebViewVisibility(visibility: Int) {
+        webView.visibility = visibility
+    }
+
+    override fun setDataAdapter(data: List<Datum>?) {
+        this.activity.runOnUiThread { adapter.setData(data) }
+    }
+
+    override fun setFollowers(string: String) {
+        tvFollowersNumber.text = string
+    }
+
+    override fun setFollowing(string: String) {
+        tvFollowingNumber.text = string
+    }
+
+    override fun setPost(string: String) {
+        tvPostNumber.text = string
+    }
+
+    override fun setImageProfile(url: String) {
+        picasso.load(url).transform(CropCircleTransformation()).into(ivImageProfile)
+    }
+
+    override fun setName(string: String) {
+        tvName.text = string
+    }
+
+    override fun setUserName(string: String) {
+        tvUserName.text = string
     }
 
     override fun inflateLayout(container: ViewGroup?): View? {
         val view = FrameLayout.inflate(activity, R.layout.fragment_instagram, this)
-        return view
-    }
+        recyclerView?.setHasFixedSize(true)
+        val layoutManager = GridLayoutManager(activity, 3)
+        recyclerView?.layoutManager = layoutManager
 
-    override fun observableShouldOverrideUrlLoading(): Observable<WebResourceRequest> {
-        return Observable.create { subscriber ->
-            webView.webViewClient = object : WebViewClient() {
-                override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-                    subscriber.onNext(request)
-                    return super.shouldOverrideUrlLoading(view, request)
-                }
-            }
-        }
+        recyclerView.adapter = adapter
+        return view
     }
 
 }

@@ -1,12 +1,17 @@
 package com.rhino.socialfeed.ui.instagram.di
 
+import android.content.Context
 import com.rhino.socialfeed.app.di.modules.SessionManager
+import com.rhino.socialfeed.app.di.modules.api.InstagramApi
+import com.rhino.socialfeed.ui.instagram.InstagramAdapter
 import com.rhino.socialfeed.ui.instagram.InstagramFragment
 import com.rhino.socialfeed.ui.instagram.mvp.InstagramContract
 import com.rhino.socialfeed.ui.instagram.mvp.InstagramModel
 import com.rhino.socialfeed.ui.instagram.mvp.InstagramPresenter
 import com.rhino.socialfeed.ui.instagram.mvp.InstagramView
 import com.rhino.socialfeed.ui.main.MainActivity
+import com.rhino.socialfeed.ui.main.di.MainScope
+import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
 
@@ -22,15 +27,18 @@ class InstagramModule(private val fragment: InstagramFragment) {
 
     @Provides
     @InstagramFragmentScope
-    fun provideModel(sessionManager: SessionManager): InstagramContract.Model = InstagramModel(
+    fun provideModel(sessionManager: SessionManager, instagramApi: InstagramApi):
+            InstagramContract.Model = InstagramModel(
             fragment = fragment,
-            sessionManager = sessionManager
+            sessionManager = sessionManager,
+            instagramApi = instagramApi
     )
 
     @Provides
     @InstagramFragmentScope
-    fun provideView(activity: MainActivity
-    ): InstagramContract.View = InstagramView(activity = activity)
+    fun provideView(activity: MainActivity, adapter: InstagramAdapter, picasso: Picasso
+    ): InstagramContract.View =
+            InstagramView(activity = activity, adapter = adapter, picasso = picasso)
 
     @Provides
     @InstagramFragmentScope
@@ -41,5 +49,8 @@ class InstagramModule(private val fragment: InstagramFragment) {
     ): InstagramContract.Presenter =
             InstagramPresenter(view = view, model = model, sessionManager = sessionManager)
 
+    @Provides
+    @InstagramFragmentScope
+    fun provideContext(activity: MainActivity): Context = activity
 
 }
