@@ -13,6 +13,7 @@ import com.rhino.socialfeed.ui.instagram.mvp.InstagramContract
 import com.rhino.socialfeed.ui.settings.di.DaggerSettingsComponent
 import com.rhino.socialfeed.ui.settings.di.SettingsModule
 import com.rhino.socialfeed.ui.settings.mvp.SettingsContract
+import com.rhino.socialfeed.ui.settings.mvp.SettingsPresenter
 import kotlinx.android.synthetic.main.fragment_twitter.*
 import javax.inject.Inject
 
@@ -54,8 +55,8 @@ class SettingsFragment : Fragment() {
     }
 
     companion object {
-        // TODO: Rename and change types and number of parameters
         fun newInstance(): SettingsFragment = SettingsFragment()
+        val TAG = "TAG_${SettingsFragment::class.java.simpleName}"
     }
 
 

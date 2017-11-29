@@ -62,7 +62,7 @@ dependencies {
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt 'com.google.dagger:dagger-compiler:2.11'
 
-    //TwitterPresenter
+    //Twitter
     compile "com.twitter.sdk.android:twitter:$twitter_sdk_version"
 
     //OkHttp

@@ -19,38 +19,37 @@ class SessionManager @Inject constructor(@AppQualifier context: Context, moshi: 
 
     private val TWITTER_KEY = "twitter_key"
     private val INSTAGRAM_KEY = "instagram_key"
-    private val PREFERENCES_NAME = "sessionPreferences"
+    private val PREFERENCES_TWITTER = "twitterPreferences"
+    private val PREFERENCES_INSTAGRAM = "instagramPreferences"
 
-    private val preferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
+    private val preferencesTwitter = context.getSharedPreferences(PREFERENCES_TWITTER, Context.MODE_PRIVATE)
+    private val preferencesInstagram = context.getSharedPreferences(PREFERENCES_INSTAGRAM, Context.MODE_PRIVATE)
+
     private val twitterAdapter = moshi.adapter(MyTwitterSession::class.java)
     private val instagramAdapter = moshi.adapter(MyInstagramSession::class.java)
 
     private val twitterSubject = PublishSubject.create<MyTwitterSession>()
     private val instagramSubject = PublishSubject.create<MyInstagramSession>()
 
-    val professionalObservable: Observable<MyTwitterSession> = twitterSubject
-    val sessionObservable: Observable<MyInstagramSession> = instagramSubject
-
     val isTwitterSession: Boolean
-        get() = preferences.getString(TWITTER_KEY, "") != ""
+        get() = preferencesTwitter.getString(TWITTER_KEY, "") != ""
 
     val isInstagramSession: Boolean
-        get() = preferences.getString(INSTAGRAM_KEY, "") != ""
+        get() = preferencesInstagram.getString(INSTAGRAM_KEY, "") != ""
 
     var twitterSession: MyTwitterSession?
         @Synchronized
         set(value) {
             if (value == null) {
-                preferences.edit().remove(TWITTER_KEY).apply()
-            }
-            else {
-                preferences.saveString(TWITTER_KEY, twitterAdapter.toJson(value))
+                preferencesTwitter.edit().remove(TWITTER_KEY).apply()
+            } else {
+                preferencesTwitter.saveString(TWITTER_KEY, twitterAdapter.toJson(value))
                 twitterSubject.onNext(value)
             }
         }
         get() {
             return try {
-                twitterAdapter.fromJson(preferences.getString(TWITTER_KEY, ""))
+                twitterAdapter.fromJson(preferencesTwitter.getString(TWITTER_KEY, ""))
             } catch (error: Exception) {
                 Log.e(TAG, error.message)
                 error.printStackTrace()
@@ -62,16 +61,15 @@ class SessionManager @Inject constructor(@AppQualifier context: Context, moshi: 
         @Synchronized
         set(value) {
             if (value == null) {
-                preferences.edit().remove(INSTAGRAM_KEY).apply()
-            }
-            else {
-                preferences.saveString(INSTAGRAM_KEY, instagramAdapter.toJson(value))
+                preferencesInstagram.edit().remove(INSTAGRAM_KEY).apply()
+            } else {
+                preferencesInstagram.saveString(INSTAGRAM_KEY, instagramAdapter.toJson(value))
                 instagramSubject.onNext(value)
             }
         }
         get() {
             try {
-                return instagramAdapter.fromJson(preferences.getString(INSTAGRAM_KEY, ""))
+                return instagramAdapter.fromJson(preferencesInstagram.getString(INSTAGRAM_KEY, ""))
             } catch (error: Exception) {
                 Log.e(TAG, error.message)
                 error.printStackTrace()
@@ -79,7 +77,8 @@ class SessionManager @Inject constructor(@AppQualifier context: Context, moshi: 
             }
         }
 
-    fun clear() = preferences.edit().clear().apply()
+    fun clearTwitter() = preferencesTwitter.edit().clear().apply()
+    fun clearInstagram() = preferencesInstagram.edit().clear().apply()
 }
 
 

@@ -4,8 +4,6 @@
     <string name="base_instagram_url">https://api.instagram.com/</string>
     <string name="base_twitter_url">thttps://api.twitter.com/</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="post">Post</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
@@ -16,4 +14,6 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="settings">Settings</string>
+    <string name="login_on_instagram">Login on instagram</string>
+    <string name="error">Error, please try again</string>
 </resources>

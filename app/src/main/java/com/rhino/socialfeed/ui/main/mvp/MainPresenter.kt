@@ -17,8 +17,7 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
     private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate() {
-        view.replace(TwitterFragment.newInstance())
-
+        //view.show(TwitterFragment.newInstance(), TwitterFragment.TAG)
         compositeDisposable.apply {
             add(view.observableNavigationView().subscribe { observeNavigationView(it) })
         }
@@ -26,9 +25,9 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
 
     private fun observeNavigationView(menuItem: MenuItem?) {
         when (menuItem!!.itemId) {
-            R.id.navTwitter -> view.replace(TwitterFragment.newInstance())
-            R.id.navInstagram -> view.replace(InstagramFragment.newInstance())
-            R.id.navSettings -> view.replace(SettingsFragment.newInstance())
+            R.id.navTwitter -> view.show(TwitterFragment.newInstance(), TwitterFragment.TAG)
+            R.id.navInstagram -> view.show(InstagramFragment.newInstance(), InstagramFragment.TAG)
+            R.id.navSettings -> view.show(SettingsFragment.newInstance(), SettingsFragment.TAG)
         }
         view.setTitle(menuItem.title)
         view.closeDrawer()

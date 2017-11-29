@@ -20,14 +20,22 @@ class SettingsPresenter(
     override fun onCreate() {
 
         compositeDisposable.apply {
-
+            add(view.observableTwitter.subscribe {
+                model.logoutTwitter()
+                view.setTwitterEnable(false)
+            })
+            add(view.observableInstagram.subscribe {
+                model.logoutInstagram()
+                view.setInstagramEnable(false)
+            })
         }
 
-        if (sessionManager.isInstagramSession) {
-        }
+        view.setTwitterEnable(sessionManager.isTwitterSession)
+        view.setInstagramEnable(sessionManager.isInstagramSession)
+
     }
 
     override fun onDestroy() {
-
+        compositeDisposable.clear()
     }
 }

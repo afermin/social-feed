@@ -25,6 +25,7 @@ class InstagramContract {
         fun setLoginButtonVisibility(int: Int)
         val observablePageStarted: Observable<String>
         val observableButton: Observable<Any>
+        val observableSwipeRefresh: Observable<Any>
         fun setDataAdapter(data: List<Datum>?)
         fun setWebViewVisibility(visibility: Int)
         fun setFollowers(string: String)
@@ -33,6 +34,11 @@ class InstagramContract {
         fun setImageProfile(string: String)
         fun setName(string: String)
         fun setUserName(string: String)
+        fun setBio(string: String)
+        fun setWebsite(string: String)
+        fun setContentVisibility(int: Int)
+        fun setRefresh(boolean: Boolean)
+        fun setSwipeRefreshEnable(boolean: Boolean)
     }
 
     interface Presenter : MVPContract.Presenter

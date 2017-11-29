@@ -15,7 +15,13 @@ import io.reactivex.schedulers.Schedulers
  */
 class SettingsModel(val sessionManager: SessionManager)
     : SettingsContract.Model {
+    override fun logoutTwitter() {
+        sessionManager.clearTwitter()
+    }
 
+    override fun logoutInstagram() {
+        sessionManager.clearInstagram()
+    }
 
 
 }

@@ -8,11 +8,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing.sm"
-        android:text="@string/instagram"
+        android:text="@string/twitter"
+        android:textAppearance="@style/TextAppearance.Bold"
+        android:textColor="@color/primary"
         android:textSize="@dimen/text.sm" />
 
     <TextView
-        android:id="@+id/tvInstagram"
+        android:id="@+id/tvTwitter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing.sm"
@@ -23,11 +25,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing.sm"
-        android:text="@string/twitter"
+        android:text="@string/instagram"
+        android:textAppearance="@style/TextAppearance.Bold"
+        android:textColor="@color/primary"
         android:textSize="@dimen/text.sm" />
 
     <TextView
-        android:id="@+id/tvITwitter"
+        android:id="@+id/tvInstagram"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing.sm"

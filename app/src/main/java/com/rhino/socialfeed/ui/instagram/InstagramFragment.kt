@@ -10,12 +10,13 @@ import com.rhino.socialfeed.app.SocialFeedApplication
 import com.rhino.socialfeed.ui.instagram.di.DaggerInstagramComponent
 import com.rhino.socialfeed.ui.instagram.di.InstagramModule
 import com.rhino.socialfeed.ui.instagram.mvp.InstagramContract
+import com.rhino.socialfeed.ui.settings.mvp.SettingsPresenter
 import kotlinx.android.synthetic.main.fragment_twitter.*
 import javax.inject.Inject
 
 class InstagramFragment : Fragment() {
 
-    /*https://gist.github.com/j4rs/8963688*/
+    val TAG = ""
 
     @Inject lateinit var view: InstagramContract.View
     @Inject lateinit var presenter: InstagramContract.Presenter
@@ -53,8 +54,8 @@ class InstagramFragment : Fragment() {
     }
 
     companion object {
-        // TODO: Rename and change types and number of parameters
         fun newInstance(): InstagramFragment = InstagramFragment()
+        val TAG = "TAG_${InstagramFragment::class.java.simpleName}"
     }
 
 

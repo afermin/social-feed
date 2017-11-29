@@ -13,14 +13,15 @@
 
         <ImageView
             android:id="@+id/ivImageProfile"
-            android:layout_width="64dp"
-            android:layout_height="64dp" />
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:src="@drawable/ic_user" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
             android:orientation="vertical">
 
             <TextView
@@ -35,10 +36,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:textAppearance="@style/TextAppearance.Bold"
                 android:maxLines="1" />
 
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvBio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing.xs"
+        android:ellipsize="end"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvWebsite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing.xs"
+        android:autoLink="web"
+        android:maxLines="1"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,8 +76,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="@dimen/text.xs"
-                tools:text="69" />
+                android:text="0"
+                android:textAppearance="@style/TextAppearance.Bold"
+                android:textSize="@dimen/text.sm" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -66,7 +86,7 @@
                 android:layout_gravity="center"
                 android:text="@string/post"
                 android:textAllCaps="true"
-                android:textSize="@dimen/text.sm" />
+                android:textSize="@dimen/text.xs" />
 
         </LinearLayout>
 
@@ -80,9 +100,10 @@
                 android:id="@+id/tvFollowersNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.Bold"
                 android:layout_gravity="center"
-                android:textSize="@dimen/text.xs"
-                tools:text="69" />
+                android:text="0"
+                android:textSize="@dimen/text.sm" />
 
             <TextView
 
@@ -91,7 +112,7 @@
                 android:layout_gravity="center"
                 android:text="@string/followers"
                 android:textAllCaps="true"
-                android:textSize="@dimen/text.sm" />
+                android:textSize="@dimen/text.xs" />
 
 
         </LinearLayout>
@@ -105,10 +126,11 @@
             <TextView
                 android:id="@+id/tvFollowingNumber"
                 android:layout_width="wrap_content"
+                android:textAppearance="@style/TextAppearance.Bold"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="@dimen/text.xs"
-                tools:text="69" />
+                android:text="0"
+                android:textSize="@dimen/text.sm" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -116,7 +138,7 @@
                 android:layout_gravity="center"
                 android:text="@string/following"
                 android:textAllCaps="true"
-                android:textSize="@dimen/text.sm" />
+                android:textSize="@dimen/text.xs" />
 
         </LinearLayout>
 

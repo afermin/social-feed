@@ -2,11 +2,14 @@ package com.rhino.socialfeed.ui.instagram.mvp
 
 import android.graphics.Bitmap
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.FrameLayout
+import com.jakewharton.rxbinding2.support.v4.widget.RxSwipeRefreshLayout
 import com.jakewharton.rxbinding2.view.RxView
 import com.rhino.socialfeed.R
 import com.rhino.socialfeed.common.RxActivity
@@ -42,8 +45,14 @@ class InstagramView(override val activity: RxActivity,
 
     override val observableButton: Observable<Any> by lazy { RxView.clicks(btnLogin) }
 
+    override val observableSwipeRefresh: Observable<Any> by lazy { RxSwipeRefreshLayout.refreshes(swipeRefresh) }
+
     override fun loadWebViewLogin() {
         webView.loadUrl("https://www.instagram.com/oauth/authorize/?client_id=2a5464070558449c81adc30ce410887c&redirect_uri=http://nucleos.io/&response_type=token")
+    }
+
+    override fun setContentVisibility(int: Int) {
+        content.visibility = int
     }
 
     override fun setLoginButtonVisibility(visibility: Int) {
@@ -82,11 +91,30 @@ class InstagramView(override val activity: RxActivity,
         tvUserName.text = string
     }
 
+    override fun setBio(string: String) {
+        tvBio.text = string
+        tvBio.visibility = if (TextUtils.isEmpty(string)) View.GONE else View.VISIBLE
+    }
+
+    override fun setWebsite(string: String) {
+        tvWebsite.text = string
+        tvWebsite.visibility = if (TextUtils.isEmpty(string)) View.GONE else View.VISIBLE
+    }
+
+    override fun setRefresh(boolean: Boolean) {
+        swipeRefresh.isRefreshing = boolean
+    }
+
+    override fun setSwipeRefreshEnable(boolean: Boolean) {
+        swipeRefresh.isEnabled = boolean
+    }
+
     override fun inflateLayout(container: ViewGroup?): View? {
         val view = FrameLayout.inflate(activity, R.layout.fragment_instagram, this)
         recyclerView?.setHasFixedSize(true)
         val layoutManager = GridLayoutManager(activity, 3)
         recyclerView?.layoutManager = layoutManager
+        recyclerView?.isNestedScrollingEnabled = false
 
         recyclerView.adapter = adapter
         return view

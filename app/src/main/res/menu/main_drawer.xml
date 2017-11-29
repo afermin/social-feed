@@ -14,7 +14,7 @@
     </group>
 
     <group android:id="@+id/group_settings"
-        android:checkableBehavior="single">>
+        android:checkableBehavior="single">
             <item
                 android:id="@+id/navSettings"
                 android:icon="@drawable/ic_settings"

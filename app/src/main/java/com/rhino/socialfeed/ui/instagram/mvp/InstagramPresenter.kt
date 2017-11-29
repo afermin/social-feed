@@ -6,8 +6,11 @@ import android.view.View.VISIBLE
 import com.rhino.socialfeed.R
 import com.rhino.socialfeed.app.di.modules.SessionManager
 import com.rhino.socialfeed.models.instagram.InstagramUser
+import com.rhino.socialfeed.models.instagram.media.Media
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 
 
@@ -32,11 +35,19 @@ class InstagramPresenter(
         compositeDisposable.apply {
             add(view.observableButton.subscribe { loadWebView() })
             add(view.observablePageStarted.subscribe { pageStarted(it) })
+            add(view.observableSwipeRefresh.subscribe { getInstagramData() })
         }
 
         if (sessionManager.isInstagramSession) {
             loadInstagramData(sessionManager.instagramSession!!.accessToken)
+        } else {
+            view.setContentVisibility(GONE)
+            view.setSwipeRefreshEnable(false)
         }
+    }
+
+    override fun onDestroy() {
+        compositeDisposable.clear()
     }
 
     private fun pageStarted(url: String) {
@@ -54,7 +65,7 @@ class InstagramPresenter(
                 view.loadWebViewLogin()
             }
         } else if (url.startsWith(FAILURE_URL)) {
-
+            view.showToast(R.string.error)
         }
     }
 
@@ -65,29 +76,35 @@ class InstagramPresenter(
     }
 
     private fun loadInstagramData(accessToken: String) {
-        getInstagramData()
         model.saveInstagramToken(accessToken)
+        getInstagramData()
+        view.setSwipeRefreshEnable(true)
+        view.setRefresh(true)
+        view.setContentVisibility(VISIBLE)
         view.setWebViewVisibility(GONE)
         view.setLoginButtonVisibility(GONE)
     }
 
     private fun getInstagramData() {
-        model.getSelf()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map {
-                    setInstagramUser(it)
-                    Log.d(TAG, "getInstagramData")
-                }
-                .flatMap { model.getMedia() }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    view.setDataAdapter(it.data)
-                    Log.d(TAG, "getMedia")
-                }, {
-                    Log.d(TAG, "getMedia failed ${it.localizedMessage}")
-                })
+        compositeDisposable.add(
+                Single.zip(model.getSelf()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread()),
+                        model.getMedia()
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread()),
+                        BiFunction<InstagramUser, Media, Any> { instagramUser, media ->
+                            Log.d(TAG, "getInstagramData")
+                            setInstagramUser(instagramUser)
+                            view.setDataAdapter(media.data)
+                            view.setRefresh(false)
+                        })
+                        .doOnError {
+                            view.setRefresh(false)
+                            view.showToast(R.string.error)
+                        }
+                        .subscribe()
+        )
     }
 
     private fun setInstagramUser(user: InstagramUser) {
@@ -97,9 +114,7 @@ class InstagramPresenter(
         view.setPost(user.data!!.counts!!.media.toString())
         view.setFollowers(user.data!!.counts!!.follows.toString())
         view.setFollowing(user.data!!.counts!!.followedBy.toString())
-    }
-
-    override fun onDestroy() {
-
+        view.setBio(user.data!!.bio!!)
+        view.setWebsite(user.data!!.website!!)
     }
 }

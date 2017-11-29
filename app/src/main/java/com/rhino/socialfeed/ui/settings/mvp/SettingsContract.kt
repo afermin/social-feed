@@ -15,9 +15,15 @@ import io.reactivex.Single
 class SettingsContract {
 
     interface Model : MVPContract.Model {
+        fun logoutTwitter()
+        fun logoutInstagram()
     }
 
     interface View : MVPContract.View {
+        val observableTwitter: Observable<Any>
+        val observableInstagram: Observable<Any>
+        fun setInstagramEnable(boolean: Boolean)
+        fun setTwitterEnable(boolean: Boolean)
     }
 
     interface Presenter : MVPContract.Presenter

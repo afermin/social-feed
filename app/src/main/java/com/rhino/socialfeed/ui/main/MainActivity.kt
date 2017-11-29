@@ -12,6 +12,7 @@ import com.rhino.socialfeed.common.RxActivity
 import com.rhino.socialfeed.ui.main.di.DaggerMainComponent
 import com.rhino.socialfeed.ui.main.di.MainModule
 import com.rhino.socialfeed.ui.main.mvp.MainContract
+import com.twitter.sdk.android.core.identity.TwitterAuthClient
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.main_content.*
@@ -36,22 +37,8 @@ class MainActivity : RxActivity() {
                 drawerLayout, /* DrawerLayout object */
                 R.string.drawer_open, /* "open drawer" description */
                 R.string.drawer_close  /* "close drawer" description */
-        ) {
+        ) {}
 
-            /** Called when a drawer has settled in a completely closed state.
-            override fun onDrawerClosed(view: View?) {
-            super.onDrawerClosed(view)
-            getActionBar().setTitle(mTitle)
-            }
-
-             *//** Called when a drawer has settled in a completely open state.  *//*
-            override fun onDrawerOpened(drawerView: View?) {
-                super.onDrawerOpened(drawerView)
-                getActionBar().setTitle(mDrawerTitle)
-            }*/
-        }
-
-        // Set the drawer toggle as the DrawerListener
         drawerLayout.addDrawerListener(drawerToggle)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -65,10 +52,10 @@ class MainActivity : RxActivity() {
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val fragment = supportFragmentManager.findFragmentById(R.id.flContent)
-        fragment?.onActivityResult(requestCode, resultCode, data)
+            fragment?.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
