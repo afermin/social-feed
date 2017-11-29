@@ -1,8 +1,10 @@
 package com.rhino.socialfeed.ui.twitter.mvp
 
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import com.rhino.socialfeed.app.di.modules.SessionManager
 import com.twitter.sdk.android.core.TwitterSession
+import io.reactivex.disposables.CompositeDisposable
 
 
 /**
@@ -13,13 +15,24 @@ class TwitterPresenter(
         override val model: TwitterContract.Model, val sessionManager: SessionManager)
     : TwitterContract.Presenter {
 
-    override fun onCreate() {
-        model.getRxTwitterLogin().subscribe({ loginTwitterSuccess(it) })
+    private val compositeDisposable = CompositeDisposable()
 
-        if(sessionManager.isTwitterSession) {
+    override fun onCreate() {
+        compositeDisposable.add(model.getRxTwitterLogin().subscribe({ loginTwitterSuccess(it) }))
+        if (sessionManager.isTwitterSession) {
             showList()
         }
+    }
 
+    override fun onDestroy() {
+        compositeDisposable.clear()
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        if (!hidden && !sessionManager.isTwitterSession) {
+            view.setLoginButtonVisibility(VISIBLE)
+            view.removeViewRecycler()
+        }
     }
 
     private fun loginTwitterSuccess(twitterSession: TwitterSession?) {
@@ -31,10 +44,5 @@ class TwitterPresenter(
         view.setLoginButtonVisibility(GONE)
         view.setListAdapter()
     }
-
-    override fun onDestroy() {
-
-    }
-
 
 }

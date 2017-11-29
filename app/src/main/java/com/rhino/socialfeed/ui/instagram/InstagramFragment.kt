@@ -40,9 +40,9 @@ class InstagramFragment : Fragment() {
         presenter.onDestroy()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        btnTwitterLogin.onActivityResult(requestCode, resultCode, data)
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        presenter.onHiddenChanged(hidden)
     }
 
     private fun initComponent() {

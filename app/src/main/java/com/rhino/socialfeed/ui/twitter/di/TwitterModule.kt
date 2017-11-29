@@ -8,6 +8,7 @@ import com.rhino.socialfeed.ui.twitter.mvp.TwitterModel
 import com.rhino.socialfeed.ui.twitter.mvp.TwitterPresenter
 import com.rhino.socialfeed.ui.twitter.mvp.TwitterView
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter
+import com.twitter.sdk.android.tweetui.TweetTimelineRecyclerViewAdapter
 import com.twitter.sdk.android.tweetui.UserTimeline
 import dagger.Module
 import dagger.Provides
@@ -32,7 +33,7 @@ class TwitterModule(private val fragment: TwitterFragment) {
     @Provides
     @TwitterFragmentScope
     fun provideView(activity: MainActivity,
-                    adapter: TweetTimelineListAdapter
+                    adapter: TweetTimelineRecyclerViewAdapter
     ): TwitterContract.View = TwitterView(activity = activity, adapter = adapter)
 
     @Provides
@@ -54,10 +55,10 @@ class TwitterModule(private val fragment: TwitterFragment) {
 
     @Provides
     @TwitterFragmentScope
-    fun provideTweetTimelineListAdapter(
+    fun provideTweetTimelineRecyclerViewAdapter(
             activity: MainActivity,
             userTimeline: UserTimeline
-    ): TweetTimelineListAdapter = TweetTimelineListAdapter.Builder(activity)
+    ): TweetTimelineRecyclerViewAdapter = TweetTimelineRecyclerViewAdapter.Builder(activity)
             .setTimeline(userTimeline)
             .build()
 

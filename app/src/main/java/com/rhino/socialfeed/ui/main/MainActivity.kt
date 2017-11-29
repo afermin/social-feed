@@ -12,6 +12,7 @@ import com.rhino.socialfeed.common.RxActivity
 import com.rhino.socialfeed.ui.main.di.DaggerMainComponent
 import com.rhino.socialfeed.ui.main.di.MainModule
 import com.rhino.socialfeed.ui.main.mvp.MainContract
+import com.rhino.socialfeed.ui.twitter.TwitterFragment
 import com.twitter.sdk.android.core.identity.TwitterAuthClient
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
@@ -54,7 +55,7 @@ class MainActivity : RxActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val fragment = supportFragmentManager.findFragmentById(R.id.flContent)
+        val fragment = supportFragmentManager.findFragmentByTag(TwitterFragment.TAG)
             fragment?.onActivityResult(requestCode, resultCode, data)
     }
 

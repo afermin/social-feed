@@ -2,21 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.twitter.TwitterFragment"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".ui.twitter.TwitterFragment">
 
     <com.twitter.sdk.android.core.identity.TwitterLoginButton
         android:id="@+id/btnTwitterLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:textColor="@android:color/white" />
 
-    <ListView android:id="@+id/recycler"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="#e1e8ed"
         android:dividerHeight="1dp"
-        android:drawSelectorOnTop="false"/>
+        android:drawSelectorOnTop="false" />
 
 </FrameLayout>

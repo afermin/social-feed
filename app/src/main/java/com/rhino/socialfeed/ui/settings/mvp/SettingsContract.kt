@@ -26,6 +26,8 @@ class SettingsContract {
         fun setTwitterEnable(boolean: Boolean)
     }
 
-    interface Presenter : MVPContract.Presenter
+    interface Presenter : MVPContract.Presenter {
+        fun onHiddenChanged(hidden: Boolean)
+    }
 
 }

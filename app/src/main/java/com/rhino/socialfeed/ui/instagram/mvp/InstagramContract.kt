@@ -41,6 +41,8 @@ class InstagramContract {
         fun setSwipeRefreshEnable(boolean: Boolean)
     }
 
-    interface Presenter : MVPContract.Presenter
+    interface Presenter : MVPContract.Presenter {
+        fun onHiddenChanged(hidden: Boolean)
+    }
 
 }

@@ -40,14 +40,21 @@ class InstagramPresenter(
 
         if (sessionManager.isInstagramSession) {
             loadInstagramData(sessionManager.instagramSession!!.accessToken)
-        } else {
-            view.setContentVisibility(GONE)
-            view.setSwipeRefreshEnable(false)
         }
+
     }
 
     override fun onDestroy() {
         compositeDisposable.clear()
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        if (!hidden && !sessionManager.isInstagramSession) {
+            view.setContentVisibility(GONE)
+            view.setSwipeRefreshEnable(false)
+            view.setWebViewVisibility(VISIBLE)
+            view.setLoginButtonVisibility(VISIBLE)
+        }
     }
 
     private fun pageStarted(url: String) {

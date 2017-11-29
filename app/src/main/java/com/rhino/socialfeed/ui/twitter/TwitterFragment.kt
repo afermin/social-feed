@@ -47,6 +47,11 @@ class TwitterFragment : Fragment() {
         presenter.onDestroy()
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        presenter.onHiddenChanged(hidden)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 

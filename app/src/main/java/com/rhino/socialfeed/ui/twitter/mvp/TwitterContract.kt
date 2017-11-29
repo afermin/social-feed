@@ -20,9 +20,11 @@ class TwitterContract {
     interface View : MVPContract.View {
         fun setListAdapter()
         fun setLoginButtonVisibility(int: Int)
+        fun removeViewRecycler()
     }
 
     interface Presenter : MVPContract.Presenter {
+        fun onHiddenChanged(hidden: Boolean)
     }
 
 }

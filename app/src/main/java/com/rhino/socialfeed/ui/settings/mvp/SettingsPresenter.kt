@@ -1,5 +1,6 @@
 package com.rhino.socialfeed.ui.settings.mvp
 
+import android.view.View
 import com.rhino.socialfeed.app.di.modules.SessionManager
 import io.reactivex.disposables.CompositeDisposable
 
@@ -18,7 +19,6 @@ class SettingsPresenter(
     private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate() {
-
         compositeDisposable.apply {
             add(view.observableTwitter.subscribe {
                 model.logoutTwitter()
@@ -30,12 +30,22 @@ class SettingsPresenter(
             })
         }
 
-        view.setTwitterEnable(sessionManager.isTwitterSession)
-        view.setInstagramEnable(sessionManager.isInstagramSession)
-
+        checkSessions()
     }
 
     override fun onDestroy() {
         compositeDisposable.clear()
     }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        if (!hidden) {
+            checkSessions()
+        }
+    }
+
+    private fun checkSessions() {
+        view.setTwitterEnable(sessionManager.isTwitterSession)
+        view.setInstagramEnable(sessionManager.isInstagramSession)
+    }
+
 }
