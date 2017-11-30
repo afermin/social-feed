@@ -16,7 +16,7 @@ import dagger.Module
 import dagger.Provides
 
 /**
- * Created by alexanderjosefermingomez on 11/24/17.
+ * Created by Alexander Fermin (alexfer06@gmail.com) on 11/24/17.
  */
 @Module
 class InstagramModule(private val fragment: InstagramFragment) {

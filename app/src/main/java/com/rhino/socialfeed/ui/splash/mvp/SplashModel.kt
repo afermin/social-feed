@@ -9,7 +9,7 @@ import io.reactivex.Single
 import org.jetbrains.anko.intentFor
 
 /**
- * Created by alexanderjosefermingomez on 11/24/17.
+ * Created by Alexander Fermin (alexfer06@gmail.com) on 11/24/17.
  */
 class SplashModel(
         val activity: SplashActivity,

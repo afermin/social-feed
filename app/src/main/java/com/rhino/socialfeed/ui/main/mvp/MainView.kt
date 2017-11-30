@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.main_content.view.*
 
 /**
- * Created by alexanderjosefermingomez on 11/24/17.
+ * Created by Alexander Fermin (alexfer06@gmail.com) on 11/24/17.
  */
 
 class MainView(override val activity: RxActivity) : MVPView(activity), MainContract.View {

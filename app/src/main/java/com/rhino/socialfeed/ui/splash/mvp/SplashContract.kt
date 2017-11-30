@@ -5,10 +5,9 @@ import com.rhino.socialfeed.models.instagram.InstagramUser
 import io.reactivex.Single
 
 /**
- * Created by alexanderjosefermingomez on 11/20/17.
+ * Created by
+ * on 11/20/17.
  */
-
-
 class SplashContract {
 
     interface Model : MVPContract.Model {

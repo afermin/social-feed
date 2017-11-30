@@ -4,7 +4,7 @@ import com.rhino.socialfeed.app.di.modules.SessionManager
 import com.twitter.sdk.android.core.TwitterCore
 
 /**
- * Created by alexanderjosefermingomez on 11/24/17.
+ * Created by Alexander Fermin (alexfer06@gmail.com) on 11/24/17.
  */
 class SettingsModel(val sessionManager: SessionManager)
     : SettingsContract.Model {

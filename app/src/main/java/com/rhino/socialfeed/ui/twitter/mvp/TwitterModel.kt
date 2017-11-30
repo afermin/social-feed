@@ -7,7 +7,7 @@ import com.twitter.sdk.android.core.TwitterSession
 import io.reactivex.Observable
 
 /**
- * Created by alexanderjosefermingomez on 11/24/17.
+ * Created by Alexander Fermin (alexfer06@gmail.com) on 11/24/17.
  */
 class TwitterModel(val fragment: TwitterFragment, val sessionManager: SessionManager)
     : TwitterContract.Model {

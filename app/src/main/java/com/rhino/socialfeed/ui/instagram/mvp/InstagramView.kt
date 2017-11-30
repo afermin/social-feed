@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.instagram_content.view.*
 import kotlinx.android.synthetic.main.instagram_header.view.*
 
 /**
- * Created by alexanderjosefermingomez on 11/24/17.
+ * Created by Alexander Fermin (alexfer06@gmail.com) on 11/24/17.
  */
 
 class InstagramView(override val activity: RxActivity,

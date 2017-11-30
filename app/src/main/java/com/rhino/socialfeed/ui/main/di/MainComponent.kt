@@ -5,7 +5,7 @@ import com.rhino.socialfeed.app.di.AppComponent
 import dagger.Component
 
 /**
- * Created by alexanderjosefermingomez on 11/24/17.
+ * Created by Alexander Fermin (alexfer06@gmail.com) on 11/24/17.
  */
 @MainScope
 @Component(dependencies = arrayOf(AppComponent::class), modules = arrayOf(MainModule::class))
