@@ -1,4 +1,4 @@
-# socialma
+# Social feed
 
 Contents table
 -----------------
