@@ -35,6 +35,10 @@ class InstagramPresenter(
         compositeDisposable.apply {
             add(view.observableButton.subscribe { loadWebView() })
             add(view.observablePageStarted.subscribe { pageStarted(it) })
+            add(view.observableReceiveError.subscribe {
+                loadInitialView()
+                view.showToast(R.string.error)
+            })
             add(view.observableSwipeRefresh.subscribe { getInstagramData() })
         }
 
@@ -50,24 +54,20 @@ class InstagramPresenter(
 
     override fun onHiddenChanged(hidden: Boolean) {
         if (!hidden && !sessionManager.isInstagramSession) {
-            view.setContentVisibility(GONE)
-            view.setSwipeRefreshEnable(false)
-            view.setWebViewVisibility(VISIBLE)
-            view.setLoginButtonVisibility(VISIBLE)
+            loadInitialView()
         }
     }
 
     private fun pageStarted(url: String) {
-        Log.d(TAG, "URL : " + url)
         if (url.startsWith(REDIRECT_URI)) {
             if (url.contains("access_token")) {
-                val accessToken = url.split("#access_token=".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
+                val accessToken = url.split("#access_token=".toRegex())
+                        .dropLastWhile { it.isEmpty() }.toTypedArray()[1]
                 Log.d(TAG, "Instagram TOKEN: " + accessToken)
                 loadInstagramData(accessToken)
 
             } else if (url.contains("error_reason")) {
-                val error = if (url.contains("user_denied")) "User denied access" else "Authentication failed"
-                Log.d(TAG, error)
+                Log.d(TAG, if (url.contains("user_denied")) "User denied access" else "Authentication failed")
                 view.showToast(R.string.account_denied)
                 view.loadWebViewLogin()
             }
@@ -80,6 +80,15 @@ class InstagramPresenter(
         view.loadWebViewLogin()
         view.setLoginButtonVisibility(GONE)
         view.setWebViewVisibility(VISIBLE)
+        view.setRefresh(true)
+    }
+
+    private fun loadInitialView() {
+        view.setContentVisibility(GONE)
+        view.setSwipeRefreshEnable(false)
+        view.setWebViewVisibility(GONE)
+        view.setLoginButtonVisibility(VISIBLE)
+        view.setRefresh(false)
     }
 
     private fun loadInstagramData(accessToken: String) {

@@ -32,9 +32,8 @@ class TwitterModule(private val fragment: TwitterFragment) {
 
     @Provides
     @TwitterFragmentScope
-    fun provideView(activity: MainActivity,
-                    adapter: TweetTimelineRecyclerViewAdapter
-    ): TwitterContract.View = TwitterView(activity = activity, adapter = adapter)
+    fun provideView(activity: MainActivity
+    ): TwitterContract.View = TwitterView(activity = activity)
 
     @Provides
     @TwitterFragmentScope
@@ -44,22 +43,5 @@ class TwitterModule(private val fragment: TwitterFragment) {
             sessionManager: SessionManager
     ): TwitterContract.Presenter =
             TwitterPresenter(view = view, model = model, sessionManager = sessionManager)
-
-    @Provides
-    @TwitterFragmentScope
-    fun provideUserTimeline(
-            sessionManager: SessionManager
-    ): UserTimeline = UserTimeline.Builder()
-            .screenName("alexanderfermin")
-            .build()
-
-    @Provides
-    @TwitterFragmentScope
-    fun provideTweetTimelineRecyclerViewAdapter(
-            activity: MainActivity,
-            userTimeline: UserTimeline
-    ): TweetTimelineRecyclerViewAdapter = TweetTimelineRecyclerViewAdapter.Builder(activity)
-            .setTimeline(userTimeline)
-            .build()
 
 }

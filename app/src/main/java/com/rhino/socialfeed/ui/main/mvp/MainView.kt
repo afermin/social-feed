@@ -23,6 +23,8 @@ class MainView(override val activity: RxActivity) : MVPView(activity), MainContr
 
     override fun inflateLayout(container: ViewGroup?): View? {
         val view = FrameLayout.inflate(activity, R.layout.activity_main, this)
+        drawerLayout.navigationView.setCheckedItem(R.id.navTwitter)
+        toolbar.setTitle(R.string.twitter)
         return view
     }
 
@@ -53,5 +55,8 @@ class MainView(override val activity: RxActivity) : MVPView(activity), MainContr
         toolbar.title = title
     }
 
+    override fun setTitle(title: Int) {
+        //toolbar.setTitle(title)
+    }
 
 }

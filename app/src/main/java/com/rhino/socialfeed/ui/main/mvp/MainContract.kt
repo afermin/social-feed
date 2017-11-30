@@ -19,6 +19,7 @@ class MainContract {
         fun observableNavigationView(): Observable<MenuItem>
         fun closeDrawer()
         fun setTitle(title: CharSequence)
+        fun setTitle(title: Int)
     }
 
     interface Presenter : MVPContract.Presenter

@@ -2,10 +2,12 @@ package com.rhino.socialfeed.ui.instagram.mvp
 
 import android.graphics.Bitmap
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.FrameLayout
@@ -18,6 +20,7 @@ import com.rhino.socialfeed.models.instagram.media.Datum
 import com.rhino.socialfeed.ui.instagram.InstagramAdapter
 import com.squareup.picasso.Picasso
 import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.fragment_instagram.view.*
 import kotlinx.android.synthetic.main.instagram_content.view.*
@@ -32,15 +35,17 @@ class InstagramView(override val activity: RxActivity,
                     val picasso: Picasso)
     : MVPView(activity), InstagramContract.View {
 
+
+    private var subjectPageStarted: PublishSubject<String>? = null
     override val observablePageStarted: Observable<String> by lazy {
-        Observable.create<String>({ subscriber ->
-            webView.webViewClient = object : WebViewClient() {
-                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                    super.onPageStarted(view, url, favicon)
-                    subscriber.onNext(url)
-                }
-            }
-        })
+        subjectPageStarted = PublishSubject.create()
+        subjectPageStarted as Observable<String>
+    }
+
+    private var subjectReceiveError: PublishSubject<Any>? = null
+    override val observableReceiveError: Observable<Any> by lazy {
+        subjectReceiveError = PublishSubject.create()
+        subjectReceiveError as Observable<Any>
     }
 
     override val observableButton: Observable<Any> by lazy { RxView.clicks(btnLogin) }
@@ -117,6 +122,22 @@ class InstagramView(override val activity: RxActivity,
         recyclerView?.isNestedScrollingEnabled = false
 
         recyclerView.adapter = adapter
+
+        webView.webViewClient = object : WebViewClient(){
+
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+                subjectPageStarted?.onNext(url)
+            }
+
+            override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
+                super.onReceivedError(view, request, error)
+                Log.d("TAG", "onReceivedError")
+                subjectReceiveError?.onNext(Any())
+            }
+
+        }
+
         return view
     }
 

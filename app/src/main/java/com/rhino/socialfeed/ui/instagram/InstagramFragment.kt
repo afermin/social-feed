@@ -1,6 +1,5 @@
 package com.rhino.socialfeed.ui.instagram
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -10,13 +9,9 @@ import com.rhino.socialfeed.app.SocialFeedApplication
 import com.rhino.socialfeed.ui.instagram.di.DaggerInstagramComponent
 import com.rhino.socialfeed.ui.instagram.di.InstagramModule
 import com.rhino.socialfeed.ui.instagram.mvp.InstagramContract
-import com.rhino.socialfeed.ui.settings.mvp.SettingsPresenter
-import kotlinx.android.synthetic.main.fragment_twitter.*
 import javax.inject.Inject
 
 class InstagramFragment : Fragment() {
-
-    val TAG = ""
 
     @Inject lateinit var view: InstagramContract.View
     @Inject lateinit var presenter: InstagramContract.Presenter

@@ -1,5 +1,6 @@
 package com.rhino.socialfeed.ui.instagram.mvp
 
+import android.webkit.WebResourceRequest
 import com.rhino.socialfeed.common.mvp.MVPContract
 import com.rhino.socialfeed.models.instagram.InstagramUser
 import com.rhino.socialfeed.models.instagram.media.Datum
@@ -23,6 +24,7 @@ class InstagramContract {
     interface View : MVPContract.View {
         fun loadWebViewLogin()
         fun setLoginButtonVisibility(int: Int)
+        val observableReceiveError: Observable<Any>
         val observablePageStarted: Observable<String>
         val observableButton: Observable<Any>
         val observableSwipeRefresh: Observable<Any>

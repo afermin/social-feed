@@ -4,6 +4,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import com.rhino.socialfeed.app.di.modules.SessionManager
 import com.twitter.sdk.android.core.TwitterSession
+import com.twitter.sdk.android.tweetui.UserTimeline
 import io.reactivex.disposables.CompositeDisposable
 
 
@@ -42,7 +43,8 @@ class TwitterPresenter(
 
     private fun showList() {
         view.setLoginButtonVisibility(GONE)
-        view.setListAdapter()
+        view.setListAdapter(UserTimeline.Builder()
+                .screenName(sessionManager.twitterSession?.screenName).build())
     }
 
 }

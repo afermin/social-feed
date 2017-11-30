@@ -17,15 +17,20 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
     private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate() {
-        //view.show(TwitterFragment.newInstance(), TwitterFragment.TAG)
+        showTwitter()
         compositeDisposable.apply {
             add(view.observableNavigationView().subscribe { observeNavigationView(it) })
         }
+
+    }
+
+    override fun onDestroy() {
+        compositeDisposable.clear()
     }
 
     private fun observeNavigationView(menuItem: MenuItem?) {
         when (menuItem!!.itemId) {
-            R.id.navTwitter -> view.show(TwitterFragment.newInstance(), TwitterFragment.TAG)
+            R.id.navTwitter -> showTwitter()
             R.id.navInstagram -> view.show(InstagramFragment.newInstance(), InstagramFragment.TAG)
             R.id.navSettings -> view.show(SettingsFragment.newInstance(), SettingsFragment.TAG)
         }
@@ -33,9 +38,9 @@ class MainPresenter(override val view: MainContract.View, override val model: Ma
         view.closeDrawer()
     }
 
-    override fun onDestroy() {
-        compositeDisposable.clear()
+    private fun showTwitter() {
+        view.show(TwitterFragment.newInstance(), TwitterFragment.TAG)
+        view.setTitle(R.string.twitter)
     }
-
 
 }

@@ -23,7 +23,8 @@
 
         <include
             android:id="@+id/content"
-            layout="@layout/instagram_content" />
+            layout="@layout/instagram_content"
+            android:visibility="gone"/>
 
     </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

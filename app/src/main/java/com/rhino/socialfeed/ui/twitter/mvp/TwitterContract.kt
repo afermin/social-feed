@@ -3,6 +3,7 @@ package com.rhino.socialfeed.ui.twitter.mvp
 import com.rhino.socialfeed.common.mvp.MVPContract
 import com.twitter.sdk.android.core.TwitterSession
 import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter
+import com.twitter.sdk.android.tweetui.UserTimeline
 import io.reactivex.Observable
 
 /**
@@ -18,7 +19,7 @@ class TwitterContract {
     }
 
     interface View : MVPContract.View {
-        fun setListAdapter()
+        fun setListAdapter(userTimeline: UserTimeline)
         fun setLoginButtonVisibility(int: Int)
         fun removeViewRecycler()
     }
