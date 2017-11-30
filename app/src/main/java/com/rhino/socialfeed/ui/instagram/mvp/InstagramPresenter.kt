@@ -24,11 +24,10 @@ class InstagramPresenter(
     : InstagramContract.Presenter {
 
     private val TAG = "TAG_${InstagramPresenter::class.java.simpleName}"
-
-    private val compositeDisposable = CompositeDisposable()
-
+    private val URL = "https://www.instagram.com/oauth/authorize/?client_id=2a5464070558449c81adc30ce410887c&redirect_uri=http://nucleos.io/&response_type=token"
     private val REDIRECT_URI = "http://nucleos.io/"
     private val FAILURE_URL = "http://nucleos.io/failure"
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate() {
 
@@ -69,7 +68,7 @@ class InstagramPresenter(
             } else if (url.contains("error_reason")) {
                 Log.d(TAG, if (url.contains("user_denied")) "User denied access" else "Authentication failed")
                 view.showToast(R.string.account_denied)
-                view.loadWebViewLogin()
+                view.loadWebViewLogin(URL)
             }
         } else if (url.startsWith(FAILURE_URL)) {
             view.showToast(R.string.error)
@@ -77,10 +76,9 @@ class InstagramPresenter(
     }
 
     private fun loadWebView() {
-        view.loadWebViewLogin()
+        view.loadWebViewLogin(URL)
         view.setLoginButtonVisibility(GONE)
         view.setWebViewVisibility(VISIBLE)
-        view.setRefresh(true)
     }
 
     private fun loadInitialView() {

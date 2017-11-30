@@ -22,7 +22,7 @@ class InstagramContract {
     }
 
     interface View : MVPContract.View {
-        fun loadWebViewLogin()
+        fun loadWebViewLogin(url: String)
         fun setLoginButtonVisibility(int: Int)
         val observableReceiveError: Observable<Any>
         val observablePageStarted: Observable<String>

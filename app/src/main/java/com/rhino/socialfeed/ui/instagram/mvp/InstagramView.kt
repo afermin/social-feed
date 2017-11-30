@@ -52,8 +52,8 @@ class InstagramView(override val activity: RxActivity,
 
     override val observableSwipeRefresh: Observable<Any> by lazy { RxSwipeRefreshLayout.refreshes(swipeRefresh) }
 
-    override fun loadWebViewLogin() {
-        webView.loadUrl("https://www.instagram.com/oauth/authorize/?client_id=2a5464070558449c81adc30ce410887c&redirect_uri=http://nucleos.io/&response_type=token")
+    override fun loadWebViewLogin(url: String) {
+        webView.loadUrl(url)
     }
 
     override fun setContentVisibility(int: Int) {
