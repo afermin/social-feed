@@ -20,7 +20,7 @@ class RetrofitModule {
     @Provides
     @AppScope
     @BaseInstagramUrlQualifier
-    fun provideBaseInstagramUrl(resources: Resources): String = resources.getString(R.string.base_twitter_url)
+    fun provideBaseInstagramUrl(resources: Resources): String = resources.getString(R.string.base_instagram_url)
 
     @Provides
     @AppScope
@@ -55,7 +55,7 @@ class RetrofitModule {
     @AppScope
     @InstagramAuthenticationQualifier
     fun provideInstagramRetrofit(
-            @BaseTwitterUrlQualifier baseUrl: String,
+            @BaseInstagramUrlQualifier baseUrl: String,
             @InstagramAuthenticationQualifier client: OkHttpClient,
             converter: Converter.Factory,
             callAdapter: CallAdapter.Factory): Retrofit =

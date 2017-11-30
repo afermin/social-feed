@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Social feed</string>
+
+    <string name="base_instagram_url">https://api.instagram.com/</string>
+    <string name="base_twitter_url">thttps://api.twitter.com/</string>
+
+    <string name="social_feed">Social feed</string>
+
+    <string name="post">Post</string>
+    <string name="followers">Seguidores</string>
+    <string name="following">Siguiendo</string>
+    <string name="account_denied">Cuenta denegada</string>
+    <string name="instagram">Instagram</string>
+    <string name="twitter">Twitter</string>
+    <string name="log_out">Cerrar sesión</string>
+    <string name="drawer_open">Abrir</string>
+    <string name="drawer_close">Cerrar</string>
+    <string name="settings">Ajustes</string>
+    <string name="login_on_instagram">Iniciar sesión en instagram</string>
+    <string name="error">Error, intentelo de nuevo</string>
+    <string name="twitter_logout_success">Cierre de sesión en Twitter exitoso</string>
+    <string name="instagram_logout_success">Cierre de sesión en nstagram exitoso</string>
+
+</resources>
